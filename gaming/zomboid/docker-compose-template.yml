@@ -1,0 +1,36 @@
+version: '3'
+services:
+  zomboid-server:
+    image: renegademaster/zomboid-dedicated-server:latest
+    container_name: zomboid-server
+    restart: on-failure:3
+    environment:
+      - ADMIN_PASSWORD=default
+      - ADMIN_USERNAME=default
+      - AUTOSAVE_INTERVAL=default
+      - BIND_IP=default
+      - GAME_PORT=default
+      - GAME_VERSION=default
+      - GC_CONFIG=default
+      - MAP_NAMES=default
+      - MAX_PLAYERS=default
+      - MAX_RAM=default
+      - MOD_NAMES=default
+      - MOD_WORKSHOP_IDS=default
+      - PAUSE_ON_EMPTY=default
+      - PUBLIC_SERVER=default
+      - QUERY_PORT=default
+      - RCON_PASSWORD=default
+      - RCON_PORT=default
+      - SERVER_NAME=default
+      - SERVER_PASSWORD=default
+      - STEAM_VAC=default
+      - TZ=default
+      - USE_STEAM=default
+    ports:
+      - 16261:16261/udp
+      - 16262:16262/udp
+      - 27015:27015/tcp
+    volumes:
+      - ./ZomboidDedicatedServer:/home/steam/ZomboidDedicatedServer
+      - ./ZomboidConfig:/home/steam/Zomboid
