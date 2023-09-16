@@ -1,0 +1,53 @@
+#
+#  Project Zomboid Dedicated Server using SteamCMD Docker Image.
+#  Copyright (C) 2021-2022 Renegade-Master [renegade.master.dev@protonmail.com]
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+
+version: "3.8"
+
+services:
+  zomboid-dedicated-server:
+    build:
+      context: .
+      dockerfile: docker/zomboid-dedicated-server.Dockerfile
+    image: "docker.io/renegademaster/zomboid-dedicated-server:latest"
+    container_name: zomboid-dedicated-server
+    restart: "no"
+    environment:
+      - "ADMIN_PASSWORD=default"
+      - "MAP_NAMES=Riverside,KY"
+      - "MAX_PLAYERS=5"
+      - "MAX_RAM=2000m"
+      - "MOD_NAMES=ReducedWoodWeight2x41;BB_CommonSense;NoLighterNeeded;improvedbackpacks;improvedbackpacksauthenticZ;improvedbackpacksclothesboxredux;improvedbackpacksspiffoBackpack;improvedbackpacksundeadSurvivor;ImprovisedBackpacks;ImprovisedSilencers;ImprovisedSilencersVFEPatch;SkillRecoveryJournal;AliceSPack;AmmoMaker;Barco;BatesMetalicosRevived;CustomMapBridge;Factory;FuelTanksMod;LeGourmetRevolution;LootZetaEnhancedEdition;MilitaryComplex;RPropaneTank;Riverside;SkillsMag;SnakeUtilsPack;SnakeClothingMod;SnakeMansion;TableSaw;TallerMecanico;WPA;TMC_TrueActions;tsarslib;TheStar;wellsConstruction"
+      - "MOD_WORKSHOP_IDS=2377867605;2875848298;2714198296;2707607167;2471844569;2799742455;2503622437;2719327441;2487022075;2392709985;2619072426;2852690210"
+      - "PAUSE_ON_EMPTY=true"
+      - "SERVER_NAME=ApocalipsisZomboid"
+      - "SERVER_PASSWORD=default"
+      - "STEAM_VAC=true"
+      - "USE_STEAM=true"
+    ports:
+      - target: 16261
+        published: 16261
+        protocol: udp
+      - target: 16262
+        published: 16262
+        protocol: udp
+      - target: 27015
+        published: 27015
+        protocol: tcp
+    volumes:
+      - ./ZomboidDedicatedServer:/home/steam/ZomboidDedicatedServer
+      - ./ZomboidConfig:/home/steam/Zomboid/
