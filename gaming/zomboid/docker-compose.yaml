@@ -22,8 +22,9 @@ services:
     build:
       context: .
       dockerfile: docker/zomboid-dedicated-server.Dockerfile
-    image: "docker.io/renegademaster/zomboid-dedicated-server:latest"
     container_name: zomboid-dedicated-server
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     restart: "no"
     environment:
       - "ADMIN_PASSWORD=default"
